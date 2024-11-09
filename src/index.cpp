@@ -1377,6 +1377,7 @@ void Index<T, TagT, LabelT>::prune_all_neighbors(const uint32_t max_degree, cons
 {
     const uint32_t range = max_degree;
     const uint32_t maxc = max_occlusion_size;
+    // std::vector<uint32_t> degrees(_max_points + _num_frozen_pts);
 
     _filtered_index = true;
 
@@ -1410,6 +1411,7 @@ void Index<T, TagT, LabelT>::prune_all_neighbors(const uint32_t max_degree, cons
                 _graph_store->set_neighbours((location_t)node, new_out_neighbors);
             }
         }
+        // degrees[i] = _graph_store->get_neighbours((location_t)node).size();
     }
 
     diskann::cout << "Prune time : " << timer.elapsed() / 1000 << "ms" << std::endl;
@@ -1428,12 +1430,12 @@ void Index<T, TagT, LabelT>::prune_all_neighbors(const uint32_t max_degree, cons
     }
     if (min > max)
         min = max;
-    if (_nd > 0)
-    {
-        diskann::cout << "Index built with degree: max:" << max
-                      << "  avg:" << (float)total / (float)(_nd + _num_frozen_pts) << "  min:" << min
-                      << "  count(deg<2):" << cnt << std::endl;
-    }
+    // if (_nd > 0)
+    // {
+    diskann::cout << "Index built with degree: max:" << max
+                    << "  avg:" << (float)total / (float)(_nd + _num_frozen_pts) << "  min:" << min
+                    << "  count(deg<2):" << cnt << std::endl;
+    // }
 }
 
 // REFACTOR
