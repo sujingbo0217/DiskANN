@@ -1430,12 +1430,12 @@ void Index<T, TagT, LabelT>::prune_all_neighbors(const uint32_t max_degree, cons
     }
     if (min > max)
         min = max;
-    // if (_nd > 0)
-    // {
-    diskann::cout << "Index built with degree: max:" << max
-                    << "  avg:" << (float)total / (float)(_nd + _num_frozen_pts) << "  min:" << min
-                    << "  count(deg<2):" << cnt << std::endl;
-    // }
+    if (_nd > 0)
+    {
+        diskann::cout << "Index built with degree: max:" << max
+                      << "  avg:" << (float)total / (float)(_nd + _num_frozen_pts) << "  min:" << min
+                      << "  count(deg<2):" << cnt << std::endl;
+    }
 }
 
 // REFACTOR
