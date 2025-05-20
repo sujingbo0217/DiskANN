@@ -21,7 +21,8 @@ template <typename T> bool natural_number_set<T>::is_empty() const
 template <typename T> void natural_number_set<T>::reserve(size_t count)
 {
     _values_vector.reserve(count);
-    _values_bitset->reserve(count);
+    // _values_bitset->reserve(count);
+    _values_bitset->resize(count);
 }
 
 template <typename T> void natural_number_set<T>::insert(T id)

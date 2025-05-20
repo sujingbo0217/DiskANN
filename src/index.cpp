@@ -1326,12 +1326,14 @@ template <typename T, typename TagT, typename LabelT> void Index<T, TagT, LabelT
 
         inter_insert(node, pruned_list, scratch);
 
-        if (node_ctr % 100000 == 0)
-        {
-            diskann::cout << "\r" << (100.0 * node_ctr) / (visit_order.size()) << "% of index build completed."
-                          << std::flush;
-        }
+        // if (node_ctr % 100000 == 0)
+        // {
+        //     diskann::cout << "\r" << (100.0 * node_ctr) / (visit_order.size()) << "% of index build completed."
+        //                   << std::flush;
+        // }
     }
+
+    diskann::cout << "Index build completed." << std::endl;
 
     if (_nd > 0)
     {
@@ -1972,10 +1974,10 @@ std::pair<uint32_t, uint32_t> Index<T, TagT, LabelT>::search(const T *query, con
 
     if (L > scratch->get_L())
     {
-        diskann::cout << "Attempting to expand query scratch_space. Was created "
-                      << "with Lsize: " << scratch->get_L() << " but search L is: " << L << std::endl;
+        // diskann::cout << "Attempting to expand query scratch_space. Was created "
+        //               << "with Lsize: " << scratch->get_L() << " but search L is: " << L << std::endl;
         scratch->resize_for_new_L(L);
-        diskann::cout << "Resize completed. New scratch->L is " << scratch->get_L() << std::endl;
+        // diskann::cout << "Resize completed. New scratch->L is " << scratch->get_L() << std::endl;
     }
 
     const std::vector<LabelT> unused_filter_label;
@@ -2059,10 +2061,10 @@ std::pair<uint32_t, uint32_t> Index<T, TagT, LabelT>::search_with_filters(const 
 
     if (L > scratch->get_L())
     {
-        diskann::cout << "Attempting to expand query scratch_space. Was created "
-                      << "with Lsize: " << scratch->get_L() << " but search L is: " << L << std::endl;
+        // diskann::cout << "Attempting to expand query scratch_space. Was created "
+        //               << "with Lsize: " << scratch->get_L() << " but search L is: " << L << std::endl;
         scratch->resize_for_new_L(L);
-        diskann::cout << "Resize completed. New scratch->L is " << scratch->get_L() << std::endl;
+        // diskann::cout << "Resize completed. New scratch->L is " << scratch->get_L() << std::endl;
     }
 
     std::vector<LabelT> filter_vec;
@@ -2157,10 +2159,10 @@ size_t Index<T, TagT, LabelT>::search_with_tags(const T *query, const uint64_t K
 
     if (L > scratch->get_L())
     {
-        diskann::cout << "Attempting to expand query scratch_space. Was created "
-                      << "with Lsize: " << scratch->get_L() << " but search L is: " << L << std::endl;
+        // diskann::cout << "Attempting to expand query scratch_space. Was created "
+        //               << "with Lsize: " << scratch->get_L() << " but search L is: " << L << std::endl;
         scratch->resize_for_new_L(L);
-        diskann::cout << "Resize completed. New scratch->L is " << scratch->get_L() << std::endl;
+        // diskann::cout << "Resize completed. New scratch->L is " << scratch->get_L() << std::endl;
     }
 
     std::shared_lock<std::shared_timed_mutex> ul(_update_lock);
@@ -2861,13 +2863,13 @@ int Index<T, TagT, LabelT>::insert_point(const T *point, const TagT tag, const s
 {
 
     assert(_has_built);
-    if (tag == 0)
-    {
-        throw diskann::ANNException("Do not insert point with tag 0. That is "
-                                    "reserved for points hidden "
-                                    "from the user.",
-                                    -1, __FUNCSIG__, __FILE__, __LINE__);
-    }
+    // if (tag == 0)
+    // {
+    //     throw diskann::ANNException("Do not insert point with tag 0. That is "
+    //                                 "reserved for points hidden "
+    //                                 "from the user.",
+    //                                 -1, __FUNCSIG__, __FILE__, __LINE__);
+    // }
 
     std::shared_lock<std::shared_timed_mutex> shared_ul(_update_lock);
     std::unique_lock<std::shared_timed_mutex> tl(_tag_lock);
